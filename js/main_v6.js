@@ -18,6 +18,9 @@ var $body,
 	$constructList,
 	$constructItem,
 	$heroSlider,
+	$popupVideoContainer,
+	popupMainVideo,
+	videosData = [],
 	isDesktopScreen = false,
 	isMobileScreen = false,
 	mainMenuLinkData = [],
@@ -41,7 +44,9 @@ var $body,
 	prevScrollTop,
 	isRtl,
 	$previewPopup,
+	$popupMainVideoW,
 	$sliderVideoPopup,
+	$btnClosePopupMainVideo,
 	// DEFAULT_BODY_BG_COLOR = '#E9E9E9',
 	DEFAULT_BODY_BG_COLOR = '#fff',
 	tlLoadAnim,
@@ -108,7 +113,9 @@ $(document).ready(function ($) {
 	$formSuccess = $('.form_success');
 	$previewPopup = $('.previewPopup');
 	$sliderVideoPopup = $('.sliderVideoPopup');
-
+	$popupMainVideoW = $('.popupMainVideoW');
+	$popupVideoContainer = $('#popupVideoContainer');
+	$btnClosePopupMainVideo = $('.btnClosePopupMainVideo');
 	tlNumbers = gsap.timeline({
 		paused: true,
 		scrollTrigger: {
@@ -810,53 +817,29 @@ $(document).ready(function ($) {
 		}
 	});
 
-	const videoPlayer = Array.from(document.querySelectorAll('.video_block')).map(p => new Plyr(p, {
-		iconUrl: 'i/sprite/sprite.svg',
-		invertTime: false,
-		hideControls: false
-	}));
-
-	videoPlayer.map(item => item.on('play', () => {
-		item.toggleControls(true);
-
-		videoPlayer.map((itemA) => {
-			if (itemA !== item) {
-				itemA.stop();
-				// itemA.currentTime = 0
-			}
-		})
-
-		var sizeWrap = $(item.elements.container).closest('.preview_sm_img_in')
-
-		if (sizeWrap) {
-			var sizeWrapWidth = sizeWrap.height() / 9 * 16;
-			sizeWrap.width(sizeWrapWidth)
-		}
-	}));
-
 	var FS_counter;
 	var FS_counter_temp;
 	var timerId = false;
 	var interval_start = false;
 
-	videoPlayer.map(item => item.on('enterfullscreen exitfullscreen', event => {
-		console.log(event.type, item.playing);
-		if (event.type === 'enterfullscreen' && item.playing && item.currentTime > 0) {
-			interval_start = false;
-			prevScrollTop = scrollTop;
-			bodyScrollBar.setPosition(0, 0)
-			ScrollTrigger.refresh(true);
-			console.log('enterfullscreen', prevScrollTop, event.type);
-		}
-		if (event.type === 'exitfullscreen' && prevScrollTop && !interval_start && item.playing && item.currentTime > 0) {
-			interval_start = true;
-			// gsap.from($body, .1 * videoPlayer.length * 3, {opacity:0})
-			// gsap.delayedCall(.1 * videoPlayer.length * 2.93, function () {
-			gsap.delayedCall(.1, function () {
-				scroll_refresh();
-			});
-		}
-	}));
+	// videoPlayer.map(item => item.on('enterfullscreen exitfullscreen', event => {
+	// 	console.log(event.type, item.playing);
+	// 	if (event.type === 'enterfullscreen' && item.playing && item.currentTime > 0) {
+	// 		interval_start = false;
+	// 		prevScrollTop = scrollTop;
+	// 		bodyScrollBar.setPosition(0, 0)
+	// 		ScrollTrigger.refresh(true);
+	// 		console.log('enterfullscreen', prevScrollTop, event.type);
+	// 	}
+	// 	if (event.type === 'exitfullscreen' && prevScrollTop && !interval_start && item.playing && item.currentTime > 0) {
+	// 		interval_start = true;
+	// 		// gsap.from($body, .1 * videoPlayer.length * 3, {opacity:0})
+	// 		// gsap.delayedCall(.1 * videoPlayer.length * 2.93, function () {
+	// 		gsap.delayedCall(.1, function () {
+	// 			scroll_refresh();
+	// 		});
+	// 	}
+	// }));
 
 	function scroll_refresh() {
 		console.log('exitfullscreen', prevScrollTop);
@@ -865,18 +848,159 @@ $(document).ready(function ($) {
 		console.log('set pos')
 	}
 
-	videoPlayer.map(item => item.on('ready', () => {
-		item.toggleControls(false);
-	}));
+	const stopAllVideoExceptCurrent = currentVideo => {
+		videosData.map(({
+			video
+		}) => {
+			if (video !== currentVideo) {
+				video.stop();
+			}
+		});
+	};
 
-	videoPlayer.map(item => item.on('pause', () => {
-		item.toggleControls(false);
+	$('.video_block').each((index, video) => {
 
-		var sizeWrap = $(item.elements.container).closest('.preview_sm_img_in')
-		if (sizeWrap) {
-			sizeWrap.width('100%')
+		let videoSrc;
+		let videoType;
+		let isEmbededVideo = false;
+		let plyrProvider = $(video).data('plyr-provider');
+
+		const plyrInstance = new Plyr(video, {
+			iconUrl: 'i/sprite/sprite.svg',
+			invertTime: false,
+			hideControls: false,
+			fullscreen: { enabled: false, fallback: false, iosNative: false},
+		});
+
+		plyrInstance.on('play', () => {
+			plyrInstance.toggleControls(true);
+
+			stopAllVideoExceptCurrent(plyrInstance);
+
+			// ne nash code
+			var sizeWrap = $(item.elements.container).closest('.preview_sm_img_in')
+
+			if (sizeWrap) {
+				var sizeWrapWidth = sizeWrap.height() / 9 * 16;
+				sizeWrap.width(sizeWrapWidth)
+			}
+
+		});
+
+		plyrInstance.on('ready', () => plyrInstance.toggleControls(false));
+		plyrInstance.on('pause', () => {
+			plyrInstance.toggleControls(false);
+
+			// ne nash code
+			var sizeWrap = $(item.elements.container).closest('.preview_sm_img_in')
+			if (sizeWrap) {
+				sizeWrap.width('100%')
+			}
+
+		});
+
+		if (plyrProvider) {
+			videoType = plyrProvider;
+			videoSrc = $(video).data('plyr-embed-id');
+			isEmbededVideo = true;
+		} else {
+			let $videoSourceEl = $('source', $(video));
+			videoSrc = $videoSourceEl.attr('src');
+			videoType = $videoSourceEl.attr('type');
 		}
-	}));
+
+		$(video).parent().attr('data-video-id', index+1);
+
+		let data = {
+			id: index+1,
+			video: plyrInstance,
+			src: videoSrc,
+			type: videoType,
+			isEmbededVideo
+		};
+
+		videosData.push(data);
+	});
+
+	const toggleVideoPopupState = () => {
+		$body.toggleClass('popup_mod');
+		$popupMainVideoW.toggleClass('active_state');
+	};
+
+	const getVideoById = id => {
+		const videoItem = videosData.filter(item => {
+			if (id === item.id) {
+				return item;
+			}
+		});
+
+		return videoItem;
+	};
+
+	const createVideoTemplate = (isEmbededVideo, src, type) => {
+		let videoTemplate;
+
+		if (isEmbededVideo) {
+			videoTemplate = `
+				<div class="popup_video popupMainVideo" data-plyr-provider=${type} data-plyr-embed-id=${src}></div>
+			`;
+		} else {
+			videoTemplate = `
+				<video class="popup_video popupMainVideo" playsinline="" controls="" muted="">
+					<source src=${src} type=${type}>
+				</video>
+			`;
+		}
+
+		return videoTemplate;
+	};
+
+	const createPopupVideo = (isEmbededVideo, src, type) => {
+		const videoTemplate = createVideoTemplate(isEmbededVideo, src, type);
+
+		$popupVideoContainer[0].innerHTML = videoTemplate;
+
+		popupMainVideo = new Plyr('.popupMainVideo', {
+			iconUrl: 'i/sprite/sprite.svg',
+			invertTime: false,
+			hideControls: false,
+			fullscreen: { enabled: false, fallback: false, iosNative: false},
+		});
+
+	};
+
+	$(document).on('click', '.plyr__control[data-plyr="fullscreen"]', function(e) {
+		e.preventDefault();
+
+		let $this = $(this);
+		let videoId = $this.closest('.plyr').find('[data-video-id]').data('video-id');
+
+		const videoItem = getVideoById(videoId)[0];
+
+		videoItem.video.stop();
+
+		createPopupVideo(videoItem.isEmbededVideo, videoItem.src, videoItem.type);
+
+		// FOR YOUTUBE
+		if (videoItem.isEmbededVideo) {
+			setTimeout(() => {
+				popupMainVideo.play();
+			}, 1000);
+		} else {
+			popupMainVideo.play();
+		}
+
+		toggleVideoPopupState();
+	});
+
+	const stopVideoPopup = () => {
+		popupMainVideo.stop();
+	};
+
+	$btnClosePopupMainVideo.on('click', () => {
+		toggleVideoPopupState();
+		stopVideoPopup();
+	});
 
 
 
@@ -897,8 +1021,8 @@ $(document).ready(function ($) {
 			isSliderVideoOpen = false;
 			reInitScrollBar();
 
-			videoPlayer.map((item) => {
-				item.stop();
+			videosData.map((item) => {
+				item.video.stop();
 			});
 
 			$sliderVideoPopup.removeClass('active_state');

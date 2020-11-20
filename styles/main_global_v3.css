@@ -20,6 +20,12 @@
       -ms-flex-align: start;
           align-items: flex-start; }
 
+
+.popup_video_w {
+  width: 100%;
+  height: 100%;
+}
+
 .preview_item {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -940,11 +946,6 @@ a {
     [dir='rtl'] .slider_control.story_mod.prev_mod {
       left: auto;
       right: calc((100% - 118.2em) / 2); }
-  .slider_control.story_mod.next_mod {
-    right: calc((100% - 118.2em) / 2); }
-    [dir='rtl'] .slider_control.story_mod.next_mod {
-      right: auto;
-      left: calc((100% - 118.2em) / 2); }
   .slider_control.v3_mod {
     display: -webkit-box !important;
     display: -ms-flexbox !important;
@@ -980,6 +981,40 @@ a {
       @media screen and (max-width: 1023px) {
         .slider_control.groundb_mod.next_mod {
           right: 0; } }
+
+@media screen and (max-width: 1023px) {
+  .slider_control.v3_mod {
+    width: 4rem;
+    height: 9rem;
+  }
+  .slider_control.story_mod {
+    margin-top: -8rem;
+  }
+  .slider_control.v3_mod.prev_mod {
+    border-top-right-radius: .9rem;
+    border-bottom-right-radius: .9rem; }
+  .slider_control.v3_mod.next_mod {
+    border-top-left-radius: .9rem;
+    border-bottom-left-radius: .9rem; }
+}
+
+.slider_control.story_mod.next_mod {
+  right: calc((100% - 118.2em) / 2); }
+  [dir='rtl'] .slider_control.story_mod.next_mod {
+    right: auto;
+    left: calc((100% - 118.2em) / 2); }
+
+@media screen and (max-width: 767px) {
+  .slider_control.story_mod {
+    margin-top: -9rem;
+  }
+  .slider_control.story_mod.prev_mod {
+    left: -1rem;
+  }
+  .slider_control.story_mod.next_mod {
+    right: -1rem;
+  }
+}
 
 .section_cols {
   margin-right: -4rem; }
@@ -2066,7 +2101,14 @@ label.error {
   font-size: 2.4rem; }
 
 .icon.arrow_v1_mod {
-  font-size: 2.8em; }
+  font-size: 2.8em;
+}
+
+@media screen and (max-width: 1023px) {
+  .icon.arrow_v1_mod {
+    font-size: 2.4rem;
+  }
+}
 
 .icon.social_mod {
   font-size: 2rem; }
@@ -4264,9 +4306,14 @@ overflow: hidden;		  }
 
 .story_w_slider {
   position: relative; }
-  @media screen and (max-width: 1023px) {
-    .story_w_slider {
-      font-size: .6vw; } }
+
+@media screen and (max-width: 1023px) {
+  .story_w_slider {
+    padding-bottom: 8rem;
+
+    font-size: .6vw;
+  }
+}
 
 .story_slider {
   position: relative;
@@ -4338,15 +4385,59 @@ overflow: hidden;		  }
   width: 100%;
   opacity: 0;
   text-align: center; }
-  @media screen and (min-width: 1024px) {
-    .story_slider_item.slick-active .story_slider_item_w_descr {
-      opacity: 1;
-      -webkit-transition: opacity 1.5s ease;
-      -o-transition: opacity 1.5s ease;
-      transition: opacity 1.5s ease; } }
+  .story_slider_item.slick-active .story_slider_item_w_descr {
+    opacity: 1;
+    -webkit-transition: opacity 1.5s ease;
+    -o-transition: opacity 1.5s ease;
+    transition: opacity 1.5s ease;}
 
 .story_slider_item_descr {
-  font-size: 2.1em; }
+  font-size: 2.1em;
+}
+
+@media screen and (max-width: 1023px) {
+  .story_slider .slick-list {
+    overflow: visible;
+  }
+
+  .story_slider_item_w_descr {
+    position: absolute;
+    top: 100%;
+    left: 0;
+
+    max-width: 100%;
+    width: 100%;
+    height: 8rem;
+    padding-top: 2rem;
+
+    overflow: hidden;
+  }
+
+  .story_slider_item_descr {
+    font-size: 1.4rem;
+  }
+
+}
+
+@media screen and (max-width: 767px) {
+  .story_w_slider {
+    padding-bottom: 10rem;
+  }
+
+  .story_slider.slick-initialized .story_slider_item {
+    width: 155em !important;
+    left: calc((100vw / 2) - ( 155em / 2));
+  }
+  .story_slider_item_w_img {
+    width: 155em;
+    height: 90.6em;
+  }
+
+  .story_slider_item_w_descr {
+    height: 10rem;
+  }
+
+}
 
 .groundb_slider_w {
   position: relative; }
@@ -5891,6 +5982,11 @@ a.plyr__control::before {
 .plyr [data-plyr=fullscreen],
 .plyr [data-plyr=pip] {
   display: none; }
+
+.story_video_block .plyr [data-plyr=fullscreen],
+.slider_video_inner .plyr [data-plyr=fullscreen],
+.preview_img_in .plyr [data-plyr=fullscreen] {
+  display: block; }
 
 .plyr--airplay-supported [data-plyr=airplay],
 .plyr--captions-enabled [data-plyr=captions],

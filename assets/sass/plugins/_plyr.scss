@@ -350,6 +350,12 @@ a.plyr__control::before {
 	display: none
 }
 
+.story_video_block .plyr [data-plyr=fullscreen],
+.slider_video_inner .plyr [data-plyr=fullscreen],
+.preview_img_in .plyr [data-plyr=fullscreen] {
+	display: block;
+}
+
 .plyr--airplay-supported [data-plyr=airplay],
 .plyr--captions-enabled [data-plyr=captions],
 .plyr--fullscreen-enabled [data-plyr=fullscreen],

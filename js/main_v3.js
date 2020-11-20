@@ -1664,12 +1664,14 @@ function progressScaleAnimation() {
 			scale: 1
 		}, {
 			scale: scaleValue,
+			ease: 'none',
 			duration: .5,
 		})
 		.fromTo($storyVideoBlock, {
 			opacity: 1
 		}, {
 			opacity: 0,
+			ease: 'none',
 			duration: .2
 		})
 }
