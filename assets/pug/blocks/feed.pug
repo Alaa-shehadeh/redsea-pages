@@ -1,0 +1,52 @@
+section.section.sectionBgTrigger(data-id-color="1")
+	.section_in.v2_mod
+		.feed_list
+			.feed_item.fadeEl
+				.section_head.decor_mod.offset_v2_mod
+					h2.section_title= data.socialFeed.title
+					.section_descr= data.socialFeed.descr
+				.feed_social_title= data.socialFeed.socialTitle
+				+social({
+					mod_block: 'feed_mod',
+					items: [
+						{mod_link: 'feed_mod', name_icon: 'facebook', mod_icon: 'size_mod'},
+						{mod_link: 'feed_mod', name_icon: 'linkedin', mod_icon: 'size_mod'},
+						{mod_link: 'feed_mod', name_icon: 'twitter', mod_icon: 'size_mod'},
+						{mod_link: 'feed_mod', name_icon: 'instagram', mod_icon: 'size_mod'},
+					]
+				})
+
+			//- +feed_item({
+			//- 	icon: 'instagram',
+			//- 	img: 'i/feeds/1.jpg'
+			//- })
+
+			//- +feed_item({
+			//- 	icon: 'instagram',
+			//- 	img: 'i/feeds/2.jpg'
+			//- })
+
+			//- +feed_item({
+			//- 	icon: 'twitter',
+			//- 	text: 'Lorem ipsum dolor sit amet, the in lconsetetur sadipscing elitr, sed latest diam nonumy'
+			//- })
+
+			//- +feed_item({
+			//- 	icon: 'twitter',
+			//- 	text: 'Lorem ipsum dolor sit amet, the in lconsetetur sadipscing elitr, sed latest diam nonumy eirmod.'
+			//- })
+			//- +feed_item({
+			//- 	img: 'i/feeds/3.jpg',
+			//- 	icon: 'instagram',
+			//- 	text: 'Lorem ipsum dolor sit amet, the in lconsetetur sadipscing elitr, sed latest diam nonumy eirmod Lorem ipsum dolor sit amet, the in lconsetetur sadipscing elitr.'
+			//- })
+			//- +feed_item({
+			//- 	img: 'i/feeds/4.jpg',
+			//- 	icon: 'twitter',
+			//- 	controls: [
+			//- 		'play',
+			//- 		'audio'
+			//- 	],
+			//- 	text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et'
+			//- })
+			

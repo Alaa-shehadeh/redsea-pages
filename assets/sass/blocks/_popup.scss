@@ -1,0 +1,288 @@
+//---------------------------------------------popup
+.popup {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 150;
+
+	width: 100%;
+	height: 100vh;
+
+	overflow-y: auto;
+	
+	font-size: 1rem;
+
+	opacity: 0;
+	pointer-events: none;
+
+	transition: opacity .3s ease;
+
+	&.preview_mod {
+		@extend %global_flex_block_row_nowrap_flex-start;
+
+		padding: 4rem 3rem;
+		background-color: rgba($dark_blue, .8);
+	}
+
+	&.feed_mod {
+		@extend %global_flex_block_row_nowrap_center;
+
+		padding: 3rem $gl_indent;
+		background-color: $white;
+
+		overflow-y: auto;
+
+		@include bp($point_3) {
+			padding-left: 3rem;
+			padding-right: 3rem;
+		}
+
+	}
+
+	&.active_state {
+		opacity: 1;
+		pointer-events: auto;
+	}
+
+	&.video_mod {
+		display: flex;
+		padding: 4rem $gl_indent;
+
+		overflow-y: auto;
+		overflow-x: hidden;
+	}
+
+}
+
+.popup_close {
+	position: absolute;
+	top: 3rem;
+	right: 3rem;
+	z-index: 10;
+
+	width: 5rem;
+	height: 5rem;
+
+	color: $white;
+
+	cursor: pointer;
+	transition: color .3s ease;
+
+	&.feed_mod {
+		color: $black;
+	}
+
+	&.video_mod {
+		color: rgba($accent_color, .6)
+	}
+
+	&:hover,
+	&:focus {
+		color: $accent_color;
+	}
+
+}
+
+.popup_video_w {
+	width: 100%;
+	height: 100%;
+
+	&.hidden_state {
+		display: none;
+	}
+
+}
+
+.popup_in {
+	&.slider_mod {
+		position: relative;
+		margin: auto;
+	}
+
+	&.preview_mod {
+		margin: auto;
+		width: 100%;
+	}
+
+	&.slider_popup_mod {
+		max-width: $page_width;
+		width: 100%;
+		margin: auto;
+	}
+
+	
+	@include bp($point_3) {
+		width: 100%;
+	}
+}
+
+.popup_video {
+	display: block;
+	height: 100%;
+	width: 100%;
+
+	object-fit: cover;
+}
+//---------------------------------------------popup###
+
+// social feed popup
+
+.feed_slider {
+	max-width: 99rem;
+	margin: 0 auto;
+}
+
+.feed_slider_item {
+	@extend %global_flex_block_row_wrap_flex-start;
+
+	display: flex !important;
+}
+
+.feed_slider_img {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+	object-position: center;
+}
+
+.feed_slider_img_wrap {
+	position: relative;
+
+	width: 50%;
+
+	&:before {
+		content: '';
+		display: block;
+		padding-bottom: 100%;
+	}
+
+	@include bp($point_4 - 1) {
+		width: 100%;
+	}
+}
+
+.feed_slider_content {
+	width: 50%;
+
+	@include bp($point_4, min) {
+		padding-left: 3rem;
+	}
+
+	[dir='rtl'] & {
+		padding-left: 0;
+		@include bp($point_4, min) {
+			padding-right: 3rem;
+		}
+	}
+
+	@include bp($point_4 - 1) {
+		width: 100%;
+		margin-top: 2rem;
+	}
+}
+
+.feed_slider_head {
+	padding: 1rem 0 2.4rem;
+	margin-bottom: 3rem;
+
+	border-bottom: 1px solid rgba($black, .5);
+}
+
+.feed_slider_link {
+	@extend %global_flex_block_row_nowrap_flex-start;
+
+	color: $black;
+	transition: color .3s;
+
+	&:hover, &:focus {
+		text-decoration: none;
+		color: $accent_color;
+	}
+}
+
+.feed_slider_account {
+	margin-right: 2rem;
+
+	font-size: 2rem;
+
+	[dir='rtl'] & {
+		margin-left: 2rem;
+		margin-right: 0;
+	}
+}
+
+.feed_slider_icon {
+	width: 2rem;
+	height: 2rem;
+	margin-left: auto;
+
+	[dir='rtl'] & {
+		margin-left: 0;
+		margin-right: auto;
+	}
+}
+
+.feed_slider_text {
+	font-size: 1.4rem;
+	line-height: 1.5;
+}
+
+// preview
+
+.popup_preview {
+	@extend %global_flex_block_row_nowrap_flex-start_flex-end;
+
+	position: relative;
+	padding: 4rem 8rem;
+	min-height: 100rem;
+	margin: auto;
+
+	@include bp($point_3) {
+		min-height: 40rem;
+		padding: 4rem 3rem;
+	}
+
+	@include bp($point_4 - 1) {
+		flex-direction: column;
+		justify-content: flex-end;
+		align-items: flex-start;
+	}
+}
+
+.btn_circle {
+	@extend %global_flex_block_row_nowrap_center_center;
+
+	width: 10rem;
+	height: 10rem;
+	margin-left: auto;
+	flex-shrink: 0;
+
+	font-size: 2.1rem;
+	font-family: $playfair;
+	font-weight: 700;
+	color: $accent_color_2;
+
+	background-color: $white;
+	border-radius: 50%;
+	box-shadow: 0 0 .6rem rgba($black, .5);
+
+	transition: all .3s;
+
+	[dir='rtl'] & {
+		font-family: $tajawal;
+	}
+
+	&:hover, &:focus {
+		text-decoration: none;
+		box-shadow: inset 0 0 .6rem rgba($black, .5);
+	}
+
+	@include bp($point_4 - 1) {
+		margin-left: 0;
+		margin-top: 2rem;
+	}
+}

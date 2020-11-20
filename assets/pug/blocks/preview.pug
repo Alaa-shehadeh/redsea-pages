@@ -1,0 +1,11 @@
+section.section.no_offset_vertical
+	.section_in.v2_mod#section_3(data-num='3')
+		+preview(data.preview.singleItem, 'sectionBgTrigger previewBlock', '2', 'left')
+		.tabs_block.sectionBgTrigger#section_4(data-num='4' data-bg-color="#fff")
+			.tabs_list.fadeEl
+				.tab_link.active_tab(data-tab=0) ENVIRONMENTAL
+				.tab_link(data-tab=1) SOCIO-ECONOMIC
+			.tabs_content_wrap
+				each item, index in data.preview.tabs
+					.tab_content(class=`${index == 0 ? 'active_tab' : ''}` data-tab=index)
+						+preview(item, 'previewBlock')

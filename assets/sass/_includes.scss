@@ -1,0 +1,39 @@
+// variables,mixins,extends
+@import "helpers/helpers_all";
+@import "family";
+
+// base
+@import "reset";
+@import "fonts";
+@import "base";
+@import "main";
+@import "print";
+
+// blocks
+@import "header";
+@import "footer";
+@import "forms";
+@import "blocks/sections";
+@import "blocks/all_icons";
+@import "blocks/latest";
+@import "blocks/feed";
+@import "blocks/partners";
+@import "blocks/preview";
+@import "blocks/hero_slider";
+@import "blocks/phase_section";
+@import "blocks/map";
+@import "blocks/designs_slider";
+@import "blocks/popup";
+@import "blocks/construction";
+@import "blocks/other";
+@import "blocks/story_slider";
+@import "blocks/groundb_slider";
+@import "blocks/slider_video_popup";
+// icons
+@import "icons";
+@import "sprite";
+
+// plugins
+@import "plugins/slick";
+@import "plugins/fancybox";
+@import "plugins/plyr";

@@ -1,0 +1,15 @@
+extends _layout
+
+block vars
+	- array = {body_class:'', layout_mod:'', sub_keywords:'', title_inner:'Red Sea - English', isArabic: false, google_map: true, home_page: true}
+block content_block
+	include blocks/home_hero_section
+	include blocks/vision_reality_section
+	include blocks/map_section
+	include blocks/design_section
+
+	include blocks/preview
+	include blocks/partners
+	include blocks/feed
+	include blocks/latest
+	include blocks/subscribe

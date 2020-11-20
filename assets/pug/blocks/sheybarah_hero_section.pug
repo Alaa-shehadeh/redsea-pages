@@ -1,0 +1,24 @@
+section.section.sheybarah_hero_mod.hero2Section.sectionBgTrigger(data-id-color="1")
+	+section_bg({
+		img: 'i/bg.jpg',
+		mod: ''
+	})
+	.section_in.sheybarah_hero_mod
+		.section_head.limit_v2_mod.decor_mod
+			h3.section_title.white_mod.offset_mod.lower_mod.accent_mod.fadeHeroEl= data.sheybarahPage.hero.title
+			.section_descr.color_mod.fadeHeroEl= data.sheybarahPage.hero.descr
+		.hero_socials
+			.hero_socials_title.fadeHeroEl Share
+			+social({
+				mod_block: '',
+				item_mod: 'fadeHeroEl',
+				items: [
+					{mod_link: '', name_icon: 'facebook', mod_icon: 'social_mod'},
+					{mod_link: '', name_icon: 'linkedin', mod_icon: 'social_mod'},
+					{mod_link: '', name_icon: 'twitter', mod_icon: 'social_mod'},
+					{mod_link: '', name_icon: 'instagram', mod_icon: 'social_mod'},
+				]
+			})
+	+section_decor({
+		direction: 'elipse'
+	})

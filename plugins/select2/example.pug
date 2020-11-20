@@ -1,0 +1,41 @@
+// Pug structure
++form_element({
+	type: 'select',
+	title: 'Your Country',
+	id: 'select_country',
+	options: ['USA', 'Canada'],
+	class_array: {
+		block_class_mod: 'form_cell_v1_mod',
+		class_mod: 'form_v1_mod your_mod',
+		elem_class: 'default_mod your_mod'
+	}
+})
+	#country_dropdown.your_mod
+
+
+// Old way
+script.
+	$('#country_select').select2({
+		minimumResultsForSearch: Infinity,
+		dropdownParent: $('#country_dropdown')
+	});
+
+// New way
+function createSelect() {
+	var $select = $('[id^=select_]');
+
+	if ($select.length) {
+		$select.each(function(index, element) {
+			var $dropdownParent = $(this).closest('dd');
+
+			$(element).select2({
+				minimumResultsForSearch: Infinity,
+				dropdownParent: $dropdownParent
+			});
+
+		})
+	}
+
+}
+
+createSelect();
