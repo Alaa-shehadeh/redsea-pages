@@ -1,0 +1,17 @@
+section.section.sectionBgTrigger(data-id-color="1")
+	.section_in
+		.other_wrap
+			.other_col.sm_mod
+				.section_head.decor_mod.fadeEl
+					h2.section_title.offset_v2_mod #[span.title_in= data.constructionPage.other.pretitle]
+						= data.constructionPage.other.title
+					.section_descr Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
+			.other_col.lg_mod
+				.other_slider_wrap
+					+slider_controls({
+						mod: 'v2_mod other_mod fadeEl',
+						icon_mod: 'arrow_mod'
+					})
+					.other_slider
+						each item in data.constructionPage.other.list
+							+other(item)

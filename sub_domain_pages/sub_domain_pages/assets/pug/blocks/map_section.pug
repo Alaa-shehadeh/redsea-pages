@@ -1,0 +1,31 @@
+section.section.map_mod.sectionBgTrigger.mapSection(data-id-color="2")
+	+section_decor({
+		mod: 'top_level_mod',
+		direction: 'top',
+	})
+	.map#map.fadeEl
+		//- img.map_img(src="i/map.jpg", alt="Map")
+	.section_in.flex_mod
+		+map_facility({
+			img_src: 'i/map_facility_img_1.jpg',
+			title: 'Airport',
+			descr: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti hic  at  the assumenda quibusdam officiis architecto aliquam reprehenderit aligment.',
+			list: [
+				{
+					icon_name: 'luggage',
+					title: 'Smart Luggage',
+				},
+				{
+					icon_name: 'duty-free',
+					title: 'Duty Free',
+				},
+				{
+					icon_name: 'brands',
+					title: 'International Brands',
+				},
+				{
+					icon_name: 'wifi',
+					title: 'Free WIFI',
+				},
+			]
+		})

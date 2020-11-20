@@ -1,0 +1,255 @@
+//---------------------------------------------phase_section
+.phase_row {
+	@include bp($point_2, min) {
+		@include flex_block(row, wrap, flex-start);
+
+		margin-right: -1rem;
+	}
+}
+
+.phase_col {
+
+	@include bp($point_2, min) {
+		width: 50%;
+		padding-right: 1rem;
+
+		&.text_mod {
+
+		}
+
+		&.info_mod {
+			padding-left: 1.4rem;
+			margin-top: 1rem;
+		}
+
+	}
+
+	@include bp($point_3) {
+		padding-bottom: 4rem;
+
+		&:last-of-type {
+			padding-bottom: 0;
+		}
+
+	}
+
+}
+
+.phase_nav {
+	@extend	%global_flex_block_row_wrap_flex-start;
+
+	margin-bottom: 1.6rem;
+}
+
+.phase_block_w {
+	display: none;
+
+	&.active_tab {
+		display: block;
+	}
+
+}
+
+.phase_nav_item {
+	margin-right: 5.6rem;
+
+	[dir='rtl'] & {
+		margin-right: 0;
+		margin-left: 5.6rem;
+
+		&:last-child {
+			margin-left: 0;
+		}
+	}
+
+	&:last-of-type {
+		margin-right: 0;
+	}
+
+}
+
+.phase_nav_link {
+	font-size: 4rem;
+	font-family: $playfair;
+	font-weight: 700;
+	color: #959595;
+
+	transition: color .3s ease;
+
+	[dir='rtl'] & {
+		font-family: $tajawal;
+	}
+
+	&:hover,
+	&:focus,
+	&.active_tab {
+		color: $accent_color;
+		text-decoration: none;
+	}
+
+}
+
+.phase_block_title {
+	position: relative;
+
+	margin-bottom: 2.8rem;
+
+	display: flex;
+	align-items: center;
+
+	font-size: 2.1rem;
+	font-family: $playfair;
+	color: $turquoise;
+
+	[dir='rtl'] & {
+		font-family: $tajawal;
+	}
+
+	@include bp($point_2, min) {
+		max-width: 59rem;
+		width: 100%;
+	}
+}
+
+.phase_block_title_line {
+	flex: 1 1 auto;
+	margin-left: 2rem;
+	height: 1px;
+	transform-origin: 0 0;
+
+	background-color: #b8b8b8;
+
+	[dir='rtl'] & {
+		margin-left: 0;
+		margin-right: 2rem;
+		transform-origin: 100% 0;
+	}
+}
+
+.phase_info_list {
+	@include bp($point_2, min) {
+		max-width: 73rem;
+		width: 100%;
+	}
+
+	@include bp($point_4, min) {
+		margin-right: -1rem;
+		margin-bottom: -1rem;
+
+		@include flex_block(row, wrap, flex-start);
+	}
+
+}
+
+.phase_info_list_item {
+
+	@include bp($point_4, min) {
+		width: 50%;
+		padding-right: 1rem;
+		padding-bottom: 3.8rem;
+	}
+	
+	@include bp($point_4 - 1) {
+		padding-bottom: 1.8rem;
+
+		&:last-of-type {
+			padding-bottom: 0;
+		}
+
+	}
+	
+
+}
+
+.phase_info {
+	@extend	%global_flex_block_row_wrap_flex-start_center;
+}
+
+.phase_info_w_icon {
+	border-radius: 50%;
+	overflow: hidden;
+
+	@include bp($point_2, min) {
+		width: 9rem;
+		height: 9rem;
+	}
+
+	@include bp($point_3) {
+		width: 7rem;
+		height: 7rem;
+	}
+
+	svg {
+		display: block;
+		width: 100%;
+		height: 100%;
+		
+		object-fit: contain;
+	}
+
+}
+
+.phase_icon_circle {
+	fill: none;
+	stroke: $accent_color;
+	stroke-miterlimit: 20;
+
+	
+	.phase_block_w:first-of-type & {
+		display: none;
+	}
+}
+
+.phase_icon_figure {
+	fill: $accent_color;
+}
+
+.phase_info_content {
+	flex: 1 0 6rem;
+	padding-left: 2.2rem;
+
+	[dir='rtl'] & {
+		padding-left: 0;
+		padding-right: 2.2rem;
+	}
+}
+
+.phase_info_title {
+	display: block;
+	margin-bottom: .6rem;
+
+	font-family: $playfair;
+	color: $turquoise;
+
+	[dir='rtl'] & {
+		font-family: $tajawal;
+	}
+
+	// &:before {
+	// 	content: attr(data-text);
+	// }
+
+	@include bp($point_2, min) {
+		font-size: 4rem;
+	}
+
+	@include bp($point_3) {
+		font-size: 3rem;
+	}
+
+}
+
+.phase_info_subtitle {
+	color: $accent_color_2;
+
+	@include bp($point_2, min) {
+		font-size: 2.1rem;
+	}
+
+	@include bp($point_3) {
+		font-size: 1.8rem;
+	}
+
+}
+
+//---------------------------------------------phase_section###

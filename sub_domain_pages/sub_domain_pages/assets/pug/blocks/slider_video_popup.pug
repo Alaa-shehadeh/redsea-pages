@@ -1,0 +1,14 @@
+.popup.video_mod.sliderVideoPopup
+	.overlay
+	.popup_in.slider_popup_mod&attributes(dirObj)
+		button.popup_close.closeSliderVideoPopup.video_mod
+			+icon('close', 'current_mod size_mod')
+		+slider_video([{
+				video: 'i/feed/feed_5.mp4',
+				text:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti voluptatum'
+			}
+		])
+		+groundb_slider({
+				slider_mod: 'popup_mod',
+				slides: data.sheybarahPage.videoList.slides
+		})
